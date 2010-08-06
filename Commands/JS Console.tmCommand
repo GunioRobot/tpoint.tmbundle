@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby
+
+require ENV['TM_SUPPORT_PATH'] + '/lib/escape.rb'
+
+def terminal_script_filepath
+  %|tell application "Terminal"
+      activate
+      do script "jsc -i #{e_as(e_sh(ENV['TM_FILEPATH']))}"
+    end tell|
+end
+
+open("|osascript", "w") { |io| io &lt;&lt; terminal_script_filepath }</string>
+	<key>input</key>
+	<string>document</string>
+	<key>keyEquivalent</key>
+	<string>@r</string>
+	<key>name</key>
+	<string>JS Console</string>
+	<key>output</key>
+	<string>discard</string>
+	<key>scope</key>
+	<string>source.js</string>
+	<key>uuid</key>
+	<string>D6DBE3AD-8CEA-44DE-ABDB-E027286C993B</string>
+</dict>
+</plist>
